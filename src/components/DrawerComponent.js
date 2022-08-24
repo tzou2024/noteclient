@@ -26,7 +26,7 @@ const DrawerComponent = ({ isOpen, onClose, btnRef, user, clearUser }) => {
 
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Navigation Menu</DrawerHeader>
+        <DrawerHeader>Menu</DrawerHeader>
 
         <DrawerBody>
           <Flex flexDirection="column">

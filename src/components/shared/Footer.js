@@ -14,11 +14,11 @@ const Footer = () => {
     >
       <Text mb="3">
          By{' '}
-        <Link href="https://appseed.us" isExternal color="blue.500">
-          PUSH TO MASTER
+        <Link href="https://github.com/tzou2024/noteserver" isExternal color="blue.500">
+          Trevor Zou
         </Link>
       </Text>
-      <Text opacity="0.5">Spotlight llc.</Text>
+      <Text opacity="0.5">Notes App</Text>
     </Flex>
   );
 };

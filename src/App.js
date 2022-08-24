@@ -12,6 +12,7 @@ import { v4 as uuid } from 'uuid'
 import { useToastHook } from './components/shared/Toast'
 import { Button, useColorMode, ColorModeScript } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
+import HomePage from './components/Notes/HomePage';
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -53,6 +54,11 @@ function App() {
       colorMode={colorMode}
     />
     <Routes>
+      <Route 
+        path="/"
+        element={<HomePage user={user} msgAlert={msgAlert} />}
+          
+        />
       <Route
         path="/signup"
         element={<SignUp setUser={setUser} msgAlert={msgAlert}/>}
@@ -61,6 +67,7 @@ function App() {
         path="/changepassword"
         element={<ChangePassword user={user} setUser={setUser} msgAlert={msgAlert}/>}
         />
+       
       <Route
       path="/signin"
       element={<SignIn setUser={setUser} msgAlert={msgAlert}/>}
