@@ -9,11 +9,16 @@ import {
     Box,
     useMediaQuery,
   } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-const FolderBox = ({isLargerThanLG}) => {
+const FolderBox = ({isLargerThanLG, folder}) => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate(`/folders/${folder.id}`)
+  }
   return (
     <Flex
-        width={isLargerThanLG ? '250px' : '25%'}
+        width={isLargerThanLG ? '15%' : '22%'}
         shadow="md"
         flexDirection="row"
         justifyContent={"space-around"}
@@ -23,12 +28,15 @@ const FolderBox = ({isLargerThanLG}) => {
         borderRadius="md"
         alignItems={"center"}
         m="2"
+        _hover={{ bg: "gray.100"}}
+        onClick={handleClick}
           >
         <Box m="1">
-        <i fontSize="2xl" className="fa fa-2x">&#xf114;</i>
+        <i fontSize="2xl" className="fa fa-lg">&#xf114;</i>
         </Box>
 
-        <Text fontSize="sm" width="100%" fontWeight="bold" whiteSpace="nowrap" textOverflow={"ellipsis"} overflowX="hidden">Karl Brighton Is My Head My Head Head fefweffwefaeffwefwef fwefa</Text>
+        <Text fontSize="xs" width="100%" fontWeight="bold" whiteSpace="nowrap" textOverflow={"ellipsis"} overflowX="hidden">{folder.name}
+        </Text>
 
     </Flex>
   )

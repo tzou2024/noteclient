@@ -12,7 +12,10 @@ import { v4 as uuid } from 'uuid'
 import { useToastHook } from './components/shared/Toast'
 import { Button, useColorMode, ColorModeScript } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
-import HomePage from './components/Notes/HomePage';
+import HomePage from './components/HomePage';
+import FolderPage from './components/Folders/FolderPage';
+import NotePage from './components/Notes/NotePage';
+import RequireAuth from './components/shared/RequireAuth';
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -56,21 +59,42 @@ function App() {
     <Routes>
       <Route 
         path="/"
-        element={<HomePage user={user} msgAlert={msgAlert} />}
+        element={
+        <RequireAuth user={user}>
+          <HomePage user={user} msgAlert={msgAlert} />
+        </RequireAuth>
+        }
           
-        />
+      />
+      <Route 
+        path="/folders/:folderID"
+        element={
+          <RequireAuth user={user}>
+            <FolderPage user={user} msgAlert={msgAlert} />
+          </RequireAuth>
+        
+        } 
+      />
+      <Route 
+        path="/folders/:folderID/notes/:noteId"
+        element={
+        <RequireAuth user={user}>
+            <NotePage user={user} msgAlert={msgAlert} />
+        </RequireAuth>
+        
+        } 
+      />
       <Route
-        path="/signup"
+        path="/sign-up"
         element={<SignUp setUser={setUser} msgAlert={msgAlert}/>}
-        />
-        <Route
+      />
+      <Route
         path="/changepassword"
         element={<ChangePassword user={user} setUser={setUser} msgAlert={msgAlert}/>}
-        />
-       
+      />
       <Route
-      path="/signin"
-      element={<SignIn setUser={setUser} msgAlert={msgAlert}/>}
+        path="/sign-in"
+        element={<SignIn setUser={setUser} msgAlert={msgAlert}/>}
       />
     </Routes>
     <Footer />

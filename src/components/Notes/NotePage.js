@@ -1,139 +1,114 @@
 import {
-    Flex,
-    Spacer,
-    Text,
-    Wrap,
-    WrapItem,
-    Avatar,
-    Box,
-    useMediaQuery,
-  } from '@chakra-ui/react';
-  import React from 'react';
+  Flex,
+  Spacer,
+  Text,
+  Wrap,
+  WrapItem,
+  Textarea,
+  Box,
+  useMediaQuery
+} from '@chakra-ui/react';
+import {useEffect, useState} from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
+import { getNote } from '../../api/notes';
+import Loading from '../shared/Loading';
+import { getFolder } from '../../api/folder';
 
-const NotePage = () => {
-    const [isLargerThanLG] = useMediaQuery('(min-width: 62em)');
+const NotePage = ({user, msgAlert}) => {
+  const [isLargerThanLG] = useMediaQuery('(min-width: 62em)');
+  let [value, setValue] = useState('')
+  const {folderID, noteId} = useParams()
+  const [note, setNote] = useState(null)
+  const [folder, setFolder] = useState(null)
+  const navigate = useNavigate()
   
-    return (
+  useEffect(() =>{
+      getNote(user, noteId)
+        .then(res=>{
+          setNote(res.data.note)
+          getFolder(user, folderID)
+            .then(res => {
+              setFolder(res.data.folder)})
+            .catch(err => console.log(err))
+        })
+        .catch(err=>console.log(err))
+  }, [])
+
+  let handleInputChange = (e) => {
+    let inputValue = e.target.value
+    e.target.style.height = 'inherit';
+    e.target.style.height = `${e.target.scrollHeight}px`; 
+
+    setValue(inputValue)
+    console.log(inputValue)
+  }
+
+  if(!note){
+    return <Loading />
+  }
+
+  return (
+    <Box minHeight="70vh" my="2">
+    
+    <Flex mx={isLargerThanLG ? '14' : '3.5rem'} fontSize="3xl" fontWeight={"semibold"}  alignItems={"baseline"}>
+    <Box onClick={() => {navigate(-1)}}>
+    <i class="fa fa-chevron-left fa-border" style={{"font-size": "15px", "--fa-border-color": "black", }} _hover={{ color: "red"}} aria-hidden="true" />
+    </Box>
+    
+    </Flex>
+        
+    
+
+    <Flex mx={isLargerThanLG ? '14' : '3.5rem'} fontSize="3xl" fontWeight={"semibold"} borderBottom="1px solid black" my="2" alignItems={"baseline"}>
+    
+    <Text >
+          {note ? note.title : "unnamed"}
+    </Text>
+    <Box px="3" textAlign={"center"} verticalAlign={"center"}>
+        <i class="fa fa-pencil" style={{"font-size": "15px"}} aria-hidden="true" />
+    </Box>
+    <Spacer />
+    <Box textAlign={"center"} verticalAlign={"center"} float="right">
+        <i class="fa fa-folder" style={{"font-size": "12px"}} aria-hidden="true" />
+    </Box>
+    {folder ?  
+      <Text px="2" fontSize="md" fontWeight={"normal"}>
+    {folder.name}
+    </Text>
+    : <Loading />}
+    
+    </Flex>
+      
+        
+       
       <Flex
         maxWidth={isLargerThanLG ? '1400px' : 'full'}
-        minHeight="70vh"
-        justifyContent="center"
-        alignItems="center"
-        py="16"
-        px={isLargerThanLG ? '16' : '6'}
-        mx="auto"
-        flexDirection={isLargerThanLG ? 'row' : 'column'}
+        minHeight="5vh"
+      //   justifyContent="center"
+      //   alignItems="center"
+        py="1"
+        // px={isLargerThanLG ? '14' : '6'}
+        flexDirection='row'
+        flexWrap={"wrap"}
+        justifyContent={"flex-start"}
+        alignContent={"flex-start"}
+        mx={isLargerThanLG ? '14' : '3.5rem'}
+        // border="2px solid black"
+        // borderRadius={"10px"}
       >
-        <Flex
-          width={isLargerThanLG ? '380px' : 'full'}
-          shadow="md"
-          minHeight="250px"
-          flexDirection="column"
-          p="8"
-          m="4"
-          border="1px solid #C4DDFF"
-          borderRadius="md"
-          justifyContent="center"
-        >
-          <Text mb="5">
-            "The team perfectly fit the specialized skill set required. They
-            focused on the most essential features helping us launch the platform
-            eight months faster than planned."
-          </Text>
-          <Wrap>
-            <WrapItem>
-              <Avatar
-                name="Karl Brighton"
-                src="https://sweta-myteam-website-fm.netlify.app/static/media/avatar-kady.78fc482c.jpg"
-              />
-            </WrapItem>
-  
-            <WrapItem>
-              <Box>
-                <Text fontSize="sm">Karl Brighton</Text>
-                <Text fontSize="sm" opacity="0.7">
-                  Software Engineer at Kadex
-                </Text>
-              </Box>
-            </WrapItem>
-          </Wrap>
-        </Flex>
-  
-        <Spacer />
-        <Flex
-          width={isLargerThanLG ? '380px' : 'full'}
-          shadow="md"
-          minHeight="250px"
-          flexDirection="column"
-          p="8"
-          m="4"
-          border="1px solid #C4DDFF"
-          borderRadius="md"
-          justifyContent="center"
-        >
-          <Text mb="5">
-            "We needed to automate our entire onboarding process. The team came in
-            and built out the whole journey. Since going live, user retention has
-            gone through the roof!"
-          </Text>
-  
-          <Wrap>
-            <WrapItem>
-              <Avatar
-                name="Karl Brighton"
-                src="https://sweta-myteam-website-fm.netlify.app/static/media/avatar-aiysha.e119a0c1.jpg"
-              />
-            </WrapItem>
-  
-            <WrapItem>
-              <Box>
-                <Text fontSize="sm">Krishna Bells</Text>
-                <Text fontSize="sm" opacity="0.7">
-                  Product Manager at Google
-                </Text>
-              </Box>
-            </WrapItem>
-          </Wrap>
-        </Flex>
-        <Spacer />
-  
-        <Flex
-          width={isLargerThanLG ? '380px' : 'full'}
-          shadow="md"
-          minHeight="250px"
-          flexDirection="column"
-          p="8"
-          m="4"
-          border="1px solid #C4DDFF"
-          borderRadius="md"
-          justifyContent="center"
-        >
-          <Text mb="5">
-            "Amazing. Our team helped us build an app that delivered a new
-            experience for hiring a physio. The launch was an instant success with
-            100k downloads in the first month."
-          </Text>
-          <Wrap>
-            <WrapItem>
-              <Avatar
-                name="Ben Spiff"
-                src="https://sweta-myteam-website-fm.netlify.app/static/media/avatar-arthur.098c2e26.jpg"
-              />
-            </WrapItem>
-  
-            <WrapItem>
-              <Box>
-                <Text fontSize="sm">Ben Spiff</Text>
-                <Text fontSize="sm" opacity="0.7">
-                  Founder of Crypto Inc.
-                </Text>
-              </Box>
-            </WrapItem>
-          </Wrap>
-        </Flex>
+      <Textarea
+        onChange={handleInputChange}
+        minHeight={"15rem"}
+        style={{"border": "solid 1px black"}}
+        overflow="hidden"
+        defaultValue={note.body}
+        
+        
+      />
+      
       </Flex>
-    );
-  };
-
+    </Box>
+  )
+}
 
 export default NotePage

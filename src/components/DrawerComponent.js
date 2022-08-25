@@ -43,7 +43,7 @@ const DrawerComponent = ({ isOpen, onClose, btnRef, user, clearUser }) => {
               </>
             ) : 
             (
-              <Link onClick={() => navigate("/signin")} mb="3">Login</Link>
+              <Link onClick={() => navigate("/sign-in")} mb="3">Login</Link>
             )
             }
           </Flex>

@@ -1,7 +1,7 @@
 import { extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 const dark = "#232323";
-const light = "bisque";
+const light = "white";
 
 const theme = extendTheme({
   styles: {
