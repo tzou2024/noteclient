@@ -1,13 +1,8 @@
 import React from 'react'
 import {
     Flex,
-    Spacer,
     Text,
-    Wrap,
-    WrapItem,
-    Avatar,
     Box,
-    useMediaQuery,
   } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 

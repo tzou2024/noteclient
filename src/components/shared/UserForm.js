@@ -75,11 +75,11 @@ export default function UserForm(props) {
                   />
                   <FormErrorMessage>{errors.password}</FormErrorMessage>
                 </FormControl>
-                <Button type="submit" colorScheme="purple" width="full">
+                <Button type="submit" colorScheme="gray" width="full">
                   { buttonText }
                 </Button>
                 {(code === "signup") &&  <>
-                <Text textAlign={"center"} fontSize='xs'>Already Have an Account? <Link href="/signin" color='blue'>Login</Link></Text> 
+                <Text textAlign={"center"} fontSize='xs'>Already Have an Account? <Link href="/sign-in" color='blue'>Login</Link></Text> 
                 </>}
                 {(code === "login") &&  <>
                 <Text textAlign={"center"} fontSize='xs'>Don't have an account? <Link href="/sign-up" color='blue'>Signup</Link></Text> 

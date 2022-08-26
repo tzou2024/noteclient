@@ -1,23 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {
     Flex,
-    Spacer,
     Text,
-    Wrap,
-    WrapItem,
-    Avatar,
     Box,
     useMediaQuery,
   } from '@chakra-ui/react';
 import FolderBox from './shared/FolderBox';
-import FolderIcon from './shared/FolderIcon';
 import NoteRow from './shared/NoteRow';
-import Loading from './shared/Loading';
-import NotePage from './Notes/NotePage';
 import { getFolders } from '../api/folder';
 import { getNotes } from '../api/notes';
 import Moda from './Folders/Moda';
-import FolderForm from './Folders/FolderForm';
 import CreateNote from './Notes/CreateNote';
 
 const HomePage = ({user, msgAlert}) => {
