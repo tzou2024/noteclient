@@ -20,3 +20,20 @@ export const getNote = (user, NoteId) => {
 		},
 	})
 }
+
+export const createNote = (user, title, body, folder) => {
+	return axios({
+		url: apiUrl + '/notes/',
+		method: 'POST',
+		headers: {
+			Authorization: `Token ${user.token}`
+		},
+		data: {
+			note: {
+				title: title,
+				body: body,
+				folder: folder
+			}	
+		}
+	})
+} 

@@ -5,6 +5,7 @@ import UserForm from '../shared/UserForm'
 // import apiUrl from '../../apiConfig'
 import { signUp, signIn } from '../../api/auth'
 import { useNavigate } from 'react-router-dom'
+import { createFolder } from '../../api/folder'
 
 const SignUp = ({ setUser, msgAlert }) => {
   const navigate = useNavigate();
@@ -32,9 +33,16 @@ const SignUp = ({ setUser, msgAlert }) => {
         signIn(credentials)
           .then(res => {
             setUser(res.data.user)
+            console.log("got here")
+            createFolder(res.data.user, null, "")
+              .then(res => {
+                console.log(res)
+                msgAlert('Sign in success!', 'success')
+                navigate('/')
+              })
+              .catch(err => console.log(err))
             console.log('res.data.user', res.data.user)
-            msgAlert('Sign in success!', 'success')
-            navigate('/')
+            
           })
           .catch(err => {
             msgAlert("signin error", "error")

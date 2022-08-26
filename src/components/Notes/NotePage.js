@@ -52,7 +52,7 @@ const NotePage = ({user, msgAlert}) => {
     
     <Flex mx={isLargerThanLG ? '14' : '3.5rem'} fontSize="3xl" fontWeight={"semibold"}  alignItems={"baseline"}>
     <Box onClick={() => {navigate(-1)}}>
-    <i class="fa fa-chevron-left fa-border" style={{"font-size": "15px", "--fa-border-color": "black", }} _hover={{ color: "red"}} aria-hidden="true" />
+    <i className="fa fa-chevron-left fa-border" style={{"font-size": "15px", "--fa-border-color": "black", }} _hover={{ color: "red"}} aria-hidden="true" />
     </Box>
     
     </Flex>
@@ -65,17 +65,17 @@ const NotePage = ({user, msgAlert}) => {
           {note ? note.title : "unnamed"}
     </Text>
     <Box px="3" textAlign={"center"} verticalAlign={"center"}>
-        <i class="fa fa-pencil" style={{"font-size": "15px"}} aria-hidden="true" />
+        <i className="fa fa-pencil" style={{"font-size": "15px"}} aria-hidden="true" />
     </Box>
     <Spacer />
     <Box textAlign={"center"} verticalAlign={"center"} float="right">
-        <i class="fa fa-folder" style={{"font-size": "12px"}} aria-hidden="true" />
+        <i className="fa fa-folder" style={{"font-size": "12px"}} aria-hidden="true" />
     </Box>
     {folder ?  
       <Text px="2" fontSize="md" fontWeight={"normal"}>
     {folder.name}
     </Text>
-    : <Loading />}
+    : "No Folder"}
     
     </Flex>
       

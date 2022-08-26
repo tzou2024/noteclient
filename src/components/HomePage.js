@@ -16,11 +16,21 @@ import Loading from './shared/Loading';
 import NotePage from './Notes/NotePage';
 import { getFolders } from '../api/folder';
 import { getNotes } from '../api/notes';
+import Moda from './Folders/Moda';
+import FolderForm from './Folders/FolderForm';
+import CreateNote from './Notes/CreateNote';
 
-const HomePage = ({user}) => {
+const HomePage = ({user, msgAlert}) => {
     const [folders, setFolders] = useState([])
     const [notes, setNotes] = useState([])
+    const [updated, setUpdated ] = useState(false)
     
+    const toggleUpdated = () => {
+      setUpdated((prev) => {
+        return !prev
+      })
+    }
+
     console.log("user:", user)
     console.log(folders)
     useEffect(() => {
@@ -31,7 +41,8 @@ const HomePage = ({user}) => {
           
         })
         .catch(err => console.err)
-    }, [])
+    }, [updated])
+
     useEffect(() => {
       getNotes(user)
         .then(res => {
@@ -40,7 +51,7 @@ const HomePage = ({user}) => {
           
         })
         .catch(err => console.err)
-    }, [])
+    }, [updated])
 
 
     const [isLargerThanLG] = useMediaQuery('(min-width: 62em)');
@@ -56,16 +67,16 @@ const HomePage = ({user}) => {
       )
     })
     console.log("folderindex: ",folderIndex)
+    console.log("noteIndex: ", noteIndex)
 
     return (
         <Box minHeight="70vh" my="2">
-         <Flex mx={isLargerThanLG ? '14' : '3.5rem'} fontSize="2xl"  borderBottom="2px solid black" my="2" alignItems={"baseline"}>
-        <Text >
+
+        <Flex alignItems={"baseline"}>
+        <Text ml={isLargerThanLG ? '14' : '3.5rem'} mr="2" fontSize="2xl" fontWeight={""} borderBottom="2px solid black" my="2">
           Folders
         </Text>
-        <Box px="3" textAlign={"center"} verticalAlign={"center"}>
-            <i class="fa fa-plus-square-o" style={{"font-size": "15px"}} aria-hidden="true" />
-        </Box>
+        <Moda user={user} type="create" toggleUpdated={toggleUpdated}/>
         </Flex>
         
        
@@ -88,9 +99,13 @@ const HomePage = ({user}) => {
          
            
         </Flex>
-        <Text mx={isLargerThanLG ? '14' : '3.5rem'} fontSize="2xl" fontWeight={""} borderBottom="2px solid black" my="2">
+        <Flex alignItems={"baseline"}>
+        <Text ml={isLargerThanLG ? '14' : '3.5rem'} mr="2" fontSize="2xl" fontWeight={""} borderBottom="2px solid black" my="2">
           Documents
         </Text>
+        <CreateNote user={user} msgAlert={msgAlert} toggleUpdated={toggleUpdated} folder={null}/>
+        </Flex>
+        
 
         <Flex
           maxWidth={"full"}
@@ -111,7 +126,7 @@ const HomePage = ({user}) => {
 
         </Flex>
 
-
+      
         
       </Box>
         

@@ -82,7 +82,7 @@ export default function UserForm(props) {
                 <Text textAlign={"center"} fontSize='xs'>Already Have an Account? <Link href="/signin" color='blue'>Login</Link></Text> 
                 </>}
                 {(code === "login") &&  <>
-                <Text textAlign={"center"} fontSize='xs'>Don't have an account? <Link href="/signup" color='blue'>Signup</Link></Text> 
+                <Text textAlign={"center"} fontSize='xs'>Don't have an account? <Link href="/sign-up" color='blue'>Signup</Link></Text> 
                 </>}
                 
 

@@ -13,6 +13,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.fa-chevron-left:hover {
+.fa:hover {
+  background-color: #EDF2F7;
+}
+
+.fa-plus-square-o:hover {
   background-color: #EDF2F7;
 }

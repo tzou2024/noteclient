@@ -27,7 +27,7 @@ const formatDate = (dateString) => {
   return (
     <Flex py="2" borderBottom={"1px solid black"} alignContent="center" alignItems={"center"} width={ "full"}  _hover={{ bg: "gray.100"}} m="1" onClick={handleClick}>
     <Box px="1" width="10%" textAlign={"center"} verticalAlign={"center"}>
-        <i class="fa fa-file-text fa-lg" aria-hidden="true" />
+        <i className="fa fa-file-text fa-lg" aria-hidden="true" />
     </Box>
     <Box px="2" width="60%" textAlign={"left"} whiteSpace="nowrap" textOverflow={"ellipsis"} overflowX="hidden">
         {note.title}
@@ -36,7 +36,7 @@ const formatDate = (dateString) => {
         {formatDate(note.updated)}
     </Box>
     <Box px="2" width="5%" textAlign={"right"}>
-        <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
+        <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
     </Box>
     
     </Flex>

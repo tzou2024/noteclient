@@ -20,3 +20,36 @@ export const getFolder = (user, folderId) => {
 		},
 	})
 }
+
+export const createFolder = (user, name, desc) => {
+	return axios({
+		url: apiUrl + '/folders/',
+		method: 'POST',
+		headers: {
+			Authorization: `Token ${user.token}`
+		},
+		data: {
+			folder: {
+				name: name || "",
+				description: desc || ""
+			}	
+		}
+	})
+} 
+
+export const editFolder = (user, folderId, name, desc) => {
+	console.log("name: ", name, "description: ", desc)
+	return axios({
+		url: apiUrl + `/folders/${folderId}/`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token ${user.token}`
+		},
+		data: {
+			folder: {
+				name: name,
+				description: desc
+			}	
+		}
+	})
+} 

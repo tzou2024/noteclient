@@ -26,6 +26,7 @@ const SignIn = ({ setUser, msgAlert }) => {
             setUser(res.data.user)
             msgAlert("Log in success", "success")
             console.log('res.data.user', res.data.user)
+            
             navigate('/')
           })
           .catch(error => {
