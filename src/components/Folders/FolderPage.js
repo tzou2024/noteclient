@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {
     Flex,
-    Spacer,
+    Button,
     Text,
     Wrap,
     WrapItem,
@@ -10,13 +10,14 @@ import {
     useMediaQuery,
   } from '@chakra-ui/react';
 import FolderBox from '../shared/FolderBox';
-import DocumentRow from '../shared/DocumentRow';
+import NoteRow from '../shared/NoteRow';
 import NotePage from '../Notes/NotePage';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getFolder } from '../../api/folder';
+import { getFolder, deleteFolder } from '../../api/folder';
 import Loading from '../shared/Loading';
 import Moda from './Moda';
-const FolderPage = ({user}) => {
+import CreateNote from '../Notes/CreateNote';
+const FolderPage = ({user, msgAlert}) => {
 
     const [isLargerThanLG] = useMediaQuery('(min-width: 62em)');
     const {folderID} = useParams()
@@ -43,9 +44,17 @@ const FolderPage = ({user}) => {
 
     const noteIndex = notes.map((note, index) => {
       return (
-        <DocumentRow key={index} note={note} isLargerThanLG={isLargerThanLG}/>
+        <NoteRow key={index} note={note} isLargerThanLG={isLargerThanLG} toggleUpdated={toggleUpdated} user={user}/>
       )
     })
+
+    const handleDelete = () => {
+      deleteFolder(user, folderID)
+        .then(res => {
+          navigate('/')
+        })
+        .catch(err => console.log(err))
+    }
 
     return (
         <Box minHeight="70vh" my="2">
@@ -75,7 +84,7 @@ const FolderPage = ({user}) => {
           Notes
         </Text>
         <Box  verticalAlign={"bottom"}>
-            <i className="fa fa-plus-square-o" style={{"font-size": "15px"}} aria-hidden="true" verticalAlign={"bottom"}/>
+            <CreateNote user={user} msgAlert={msgAlert} toggleUpdated={toggleUpdated} folder={folderID} />
         </Box>
         </Flex>
         
@@ -89,16 +98,18 @@ const FolderPage = ({user}) => {
         //   bgColor="green"
           
 
-          mx={isLargerThanLG ? '14' : '2.5rem'}
+          mx={isLargerThanLG ? '14' : '3.5rem'}
           
 
         >
         
         {noteIndex.length > 0 ? noteIndex : "Add some notes!"}
 
-        </Flex>
+        <Text my="4">
+        <Button colorScheme='red' onClick={handleDelete} >Delete Folder</Button>
+        </Text>
 
-       
+        </Flex>
         
       </Box>
         

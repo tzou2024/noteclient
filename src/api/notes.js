@@ -37,3 +37,43 @@ export const createNote = (user, title, body, folder) => {
 		}
 	})
 } 
+
+export const editNoteTitle = (user,noteId, title) => {
+	return axios({
+		url: apiUrl + `/notes/${noteId}/`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token ${user.token}`
+		},
+		data: {
+			note: {
+				title: title
+			}	
+		}
+	})
+}
+
+export const editNoteBody = (user,noteId, body) => {
+	return axios({
+		url: apiUrl + `/notes/${noteId}/`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token ${user.token}`
+		},
+		data: {
+			note: {
+				body: body
+			}	
+		}
+	})
+}
+
+export const deleteNote = (user, noteId) => {
+	return axios({
+		url: apiUrl + `/notes/${noteId}/`,
+		method: 'DELETE',
+		headers: {
+			Authorization: `Token ${user.token}`
+		}
+	})
+}

@@ -10,8 +10,20 @@ import {
     useMediaQuery,
   } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { deleteNote } from '../../api/notes';
 
-const DocumentRow = ({user, isLargerThanLG, note}) => {
+const NoteRow = ({user, isLargerThanLG, note, toggleUpdated}) => {
+
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    console.log("clicked")
+    console.log(user)
+    deleteNote(user, note.id)
+      .then(res => {
+        toggleUpdated()
+      })
+      .catch(err => console.log(err))
+  }
 
 const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric"}
@@ -35,12 +47,12 @@ const formatDate = (dateString) => {
     <Box px="2" width="25%" textAlign={"center"} >
         {formatDate(note.updated)}
     </Box>
-    <Box px="2" width="5%" textAlign={"right"}>
-        <i className="fa fa-ellipsis-v fa-lg" aria-hidden="true" />
+    <Box px="2" width="5%" textAlign={"right"} onClick={handleDelete}>
+        <i className="fa fa-trash-o fa-md" aria-hidden="true" />
     </Box>
     
     </Flex>
   )
 }
 
-export default DocumentRow
+export default NoteRow

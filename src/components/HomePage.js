@@ -11,7 +11,7 @@ import {
   } from '@chakra-ui/react';
 import FolderBox from './shared/FolderBox';
 import FolderIcon from './shared/FolderIcon';
-import DocumentRow from './shared/DocumentRow';
+import NoteRow from './shared/NoteRow';
 import Loading from './shared/Loading';
 import NotePage from './Notes/NotePage';
 import { getFolders } from '../api/folder';
@@ -32,7 +32,7 @@ const HomePage = ({user, msgAlert}) => {
     }
 
     console.log("user:", user)
-    console.log(folders)
+    // console.log(folders)
     useEffect(() => {
       getFolders(user)
         .then(res => {
@@ -63,11 +63,11 @@ const HomePage = ({user, msgAlert}) => {
     })
     const noteIndex = notes.map((note, index) => {
       return (
-        <DocumentRow key={index} note={note} isLargerThanLG={isLargerThanLG}/>
+        <NoteRow key={index} note={note} isLargerThanLG={isLargerThanLG} user={user} toggleUpdated={toggleUpdated}/>
       )
     })
-    console.log("folderindex: ",folderIndex)
-    console.log("noteIndex: ", noteIndex)
+    // console.log("folderindex: ",folderIndex)
+    // console.log("noteIndex: ", noteIndex)
 
     return (
         <Box minHeight="70vh" my="2">
@@ -107,7 +107,9 @@ const HomePage = ({user, msgAlert}) => {
         </Flex>
         
 
-        <Flex
+        
+        {noteIndex.length > 0 ? 
+          <Flex
           maxWidth={"full"}
           minHeight="5vh"
           p="5"
@@ -121,11 +123,33 @@ const HomePage = ({user, msgAlert}) => {
           
 
         >
-        {noteIndex.length > 0 ? noteIndex : "Add some Notes"}
-        
 
+        {noteIndex} 
         </Flex>
 
+        : 
+        
+        <Flex
+          maxWidth={isLargerThanLG ? '1400px' : 'full'}
+          minHeight="5vh"
+        //   justifyContent="center"
+        //   alignItems="center"
+          py="1"
+          // px={isLargerThanLG ? '14' : '6'}
+          flexDirection='row'
+          flexWrap={"wrap"}
+          justifyContent={"flex-start"}
+          alignContent={"flex-start"}
+          mx={isLargerThanLG ? '14' : '3.5rem'}
+          // border="2px solid black"
+          // borderRadius={"10px"}
+        > 
+        Add some Notes!
+        </Flex>
+        }
+        
+
+        
       
         
       </Box>

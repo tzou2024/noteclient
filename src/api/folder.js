@@ -53,3 +53,14 @@ export const editFolder = (user, folderId, name, desc) => {
 		}
 	})
 } 
+
+export const deleteFolder = (user, folderId) => {
+
+	return axios({
+		url: apiUrl + `/folders/${folderId}/`,
+		method: 'DELETE',
+		headers: {
+			Authorization: `Token ${user.token}`
+		}
+	})
+} 
