@@ -62,24 +62,28 @@ https://github.com/tzou2024/noteserver
    | PATCH  | `/change-password/` | `users # changepw`  |
    | DELETE | `/sign-out/`        | `users # signout `  |
 
+ - ### Notes and Folders
+   | Verb   | URI Pattern | Controller#Action    |
+   | ------ | ----------- | -------------------- |
+   | GET    | `/` | `notes # index and folder # index` |
+
  - ### Folders
    | Verb   | URI Pattern | Controller#Action    |
    | ------ | ----------- | -------------------- |
    | GET    | `/folders` | `folders # index` |
    | GET    | `/folders/:folderId` | `folders # show` |
-   | GET    | `/myfolders`| `folders # personal show` |
-   | POST   | `/folders` | `folder # add` |
+   | POST   | `/` | `folder # add` |
    | PATCH  | `/folders/:folderId`  | `folders # update`|
    | DELETE | `/folders/:folderId`  | `folders # destroy`|
 
  - ### Notes
    | Verb   | URI Pattern | Controller#Action    |
    | ------ | ----------- | -------------------- |
-   | GET    | `/foldes/:folderId/notes` | `notes # index` |
+   | GET    | `/folders/:folderId` | `notes # index per folder` |
    | GET    | `/folders/:folderID/notes/:noteId` | `notes # show` |
    | POST   | `/folders/:folderID/notes` | `note # add` |
-   | PATCH  | `/folders/:folderID/notes/:noteId`  | `fnote # update`|
-   | DELETE | `/folders/:folderID/notes/:noteId`  | `fnote # destroy`|
+   | PATCH  | `/folders/:folderID/notes/:noteId`  | `:note # update`|
+   | DELETE | `/folders/:folderID/notes/:noteId`  | `note # destroy`|
 
 ## Schema
 
