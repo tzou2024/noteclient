@@ -110,3 +110,5 @@ https://github.com/tzou2024/noteserver
    - title: String
    - content: String
   
+## Wireframes
+![wireframes](wireframes.jpg)
