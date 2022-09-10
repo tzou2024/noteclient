@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
-	production: 'https://tzounotes.herokuapp.com',
+	production: 'https://tzounotesserver.up.railway.app',
 	development: 'http://localhost:8000',
 }
 
